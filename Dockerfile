@@ -29,8 +29,3 @@ RUN composer install --working-dir=./app
 
 RUN cp app/.env.example app/.env
 
-RUN php app/artisan key:generate && php app/artisan config:cache
-
-RUN mkdir -p app/storage/framework/{cache, sessions, views} && mkdir -p app/storage/framework/cache/data && mkdir -p app/bootstrap/cache storage storage/framework
-
-RUN php app/artisan cache:clear && php app/artisan config:clear && php app/artisan view:clear
