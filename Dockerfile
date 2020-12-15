@@ -24,8 +24,3 @@ RUN apt-get install -y \
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN composer install --working-dir=./app
-
-RUN cp app/.env.example app/.env
-
