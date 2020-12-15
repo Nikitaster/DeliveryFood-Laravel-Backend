@@ -8,10 +8,9 @@ do
 done
 echo "Database is ready"
 
+
 cd app
-php artisan config:clear
-php artisan key:generate
-php artisan env
+
 echo "======Make migrations======"
 php artisan migrate
 
