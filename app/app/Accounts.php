@@ -15,4 +15,19 @@ class Accounts extends Model
     {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function rates()
+    {
+        return $this->hasMany('App\Rate', 'author_id', 'id');
+    }
+
+    public function own_orders()
+    {
+        return $this->hasMany('App\Orders', 'client_id', 'id');
+    }
+
+    public function courier_orders()
+    {
+        return $this->hasMany('App\Orders', 'courier_id', 'id');
+    }
 }
