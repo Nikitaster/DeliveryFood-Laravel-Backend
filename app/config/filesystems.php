@@ -64,6 +64,15 @@ return [
             'url' => env('AWS_URL'),
         ],
 
+        'scaleway' => [
+            'driver' => 's3',
+            'key' => 'SCWKZAQE5PE67X3T9RHN',
+            'secret' => 'a7977c4f-4e71-4c12-85eb-43e09d26d386',
+            'region' => 'nl-ams',
+            'bucket' => 'ngudkov',
+            'endpoint' => 'https://s3.nl-ams.scw.cloud',
+        ]
+
     ],
 
 ];

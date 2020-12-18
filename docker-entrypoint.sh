@@ -12,6 +12,10 @@ echo "Database is ready"
 cd app
 composer install
 
+# for s3
+composer require aws/aws-sdk-php ^3.20.0
+composer require league/flysystem-aws-s3-v3 ^1.0
+
 cp .env.example .env
 
 mkdir -p storage/framework/cache && mkdir -p storage/framework/sessions && mkdir -p storage/framework/views && mkdir -p storage/framework/cache/data && mkdir -p bootstrap/cache storage storage/framework
@@ -24,10 +28,10 @@ php artisan key:generate && php artisan config:cache
 echo "======Make migrations======"
 php artisan migrate
 
-echo "======Compile static======"
-npm install 
-npm run dev 
-npm run prod 
+# echo "======Compile static======"
+# npm install 
+# npm run dev 
+# npm run prod 
 
 echo "======Start server======"
 php artisan serve --host=0.0.0.0 --port=80
