@@ -71,6 +71,7 @@ return [
             'region' => 'nl-ams',
             'bucket' => 'ngudkov',
             'endpoint' => 'https://s3.nl-ams.scw.cloud',
+            'visibility' => 'public',
         ]
 
     ],

@@ -39,8 +39,8 @@ class RestaurantsController extends Controller
     public function store(Request $request)
     {
         // echo $request;
-        // $image = Storage::disk('scaleway')->put('drive/', $request->file('image'));
-        // echo $image;
+        $image = Storage::disk('scaleway')->put('restaurants', $request->file('image'));
+        echo 'https://ngudkov.s3.nl-ams.scw.cloud/' . $image;
         // return Storage::url('file.txt');
         // $request->file('image')->store('images');
         return '';
