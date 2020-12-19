@@ -67,7 +67,8 @@ class RestaurantsController extends Controller
         ]);
 
         // TODO: Редирект на создание менеджера
-        return redirect(url('restaurants'));
+        return redirect(route('restaurants.index'));
+
     }
 
     /**
@@ -119,7 +120,7 @@ class RestaurantsController extends Controller
         }
 
         $restaurant->update($params);
-        return redirect(url('restaurants', $restaurant->id));
+        return redirect(route('restaurants.show', $restaurant->id));
     }
 
     /**
@@ -131,6 +132,6 @@ class RestaurantsController extends Controller
     public function destroy(Restaurants $restaurant)
     {
         $restaurant->delete();
-        return redirect(url('restaurants'));
+        return redirect(route('restaurants.index'));
     }
 }

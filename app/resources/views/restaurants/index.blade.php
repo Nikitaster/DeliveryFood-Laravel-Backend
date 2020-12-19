@@ -20,13 +20,14 @@
         @foreach ($restaurants as $restaurant)
             <tr>
                 <th class="text-center" scope="row">{{ $restaurant->id }}</th>
-                <td class="text-center"><a href="{{ url('restaurants', $restaurant->id) }}">{{ $restaurant->name }}</a></td>
+                <td class="text-center"><a href="{{ route('restaurants.show', $restaurant->id) }}">{{ $restaurant->name }}</a></td>
                 <td class="text-center">{{ $restaurant->category->name }}</td>
                 <td class="text-center">
                     <ul style="list-style-type: none; padding: 0">
                         @foreach ($restaurant->managers as $manager)
-                            <li><a href="{{url('managers', $manager->id)}}">{{$manager->account->user->name}}</a></li>    
+                            <li><a href="{{route('managers.show', $manager->id)}}">{{$manager->account->user->name}}</a></li>    
                         @endforeach
+                        <li><a href="{{route('managers.create', ['restaurant' => $restaurant->id])}}">>>Создать<<</a></li>    
                     </ul>
                 </td>
                 <td class="text-center">{{ $restaurant->address }}</td>

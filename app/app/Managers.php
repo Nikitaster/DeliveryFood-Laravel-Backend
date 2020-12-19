@@ -12,8 +12,10 @@ class Managers extends Model
      * @var array
      */
     protected $fillable = [
-        'account_id',
+        'account_id', 'restaurant_id'
     ];
+
+    public $timestamps = false;
 
     public function account()
     {
@@ -22,6 +24,6 @@ class Managers extends Model
 
     public function restaurant()
     {
-        return $this->hasOne('App\Restaurants', 'restaurant_id', 'id');
+        return $this->hasOne('App\Restaurants', 'id', 'restaurant_id');
     }   
 }

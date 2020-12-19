@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Managers;
 use Illuminate\Http\Request;
+
+use App\Restaurants;
+use App\Accounts;
+use App\Roles;
+use App\User;
+use App\Managers;
+
+use Illuminate\Support\Facades\Hash;
+
+use App\Http\Requests\ManagersRequest;
 
 class ManagersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index() 
     {
-        //
+        // 
     }
 
     /**
@@ -22,9 +27,11 @@ class ManagersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Restaurants $rest = NULL)
     {
-        //
+        return view('managers.create', ['restaurants' => Restaurants::all(),
+                                        'curr_restaurant' => $rest,
+                                        ]);
     }
 
     /**
@@ -33,53 +40,64 @@ class ManagersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ManagersRequest $request)
     {
-        //
+        try {
+            $user = User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => Hash::make($request['password']),
+            ]);
+        } catch (Exception $e) {
+            abort(500, 'Ошибка при создании менеджера!');
+        }
+
+        try {
+            $account = Accounts::create([
+                'user_id' => $user->id,
+                'role_id' => Roles::where('name', '=', 'manager')->first()->id,
+            ]);
+        } catch (Exception $e) {
+            $user->delete();
+            abort(500, 'Ошибка при создании менеджера!');
+        }
+
+        try {
+            $manager = Managers::create([
+                'account_id' => $account->id,
+                'restaurant_id' => Restaurants::where('name', '=', $request['restaurant'])->first()->id,
+            ]);
+        } catch (Exception $e) {
+            $user->delete();
+            $account->delete();
+            abort(500, 'Ошибка при создании менеджера!');
+        }
+
+        return redirect(route('managers.show', $manager->id));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Managers  $managers
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Managers $managers)
+    public function show(Managers $manager)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Managers  $managers
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Managers $managers)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Managers  $managers
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Managers $managers)
-    {
-        //
+        return view('managers.show', ['manager' => $manager]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Managers  $managers
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Managers $managers)
+    public function destroy(Managers $manager)
     {
-        //
+        $manager->account->user->delete();
+        $manager->account->delete();
+        $manager->delete();
+        return redirect(route('restaurants.index'));
     }
 }
