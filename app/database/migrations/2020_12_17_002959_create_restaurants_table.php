@@ -19,10 +19,12 @@ class CreateRestaurantsTable extends Migration
             $table->string('address');
             $table->unsignedBigInteger('image_id');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('manager_id')->nullable();
             $table->timestamps();
 
             $table->foreign('image_id')->references('id')->on('images')->onDelete('set null');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('manager_id')->references('id')->on('managers')->onDelete('set null');
         });
     }
 

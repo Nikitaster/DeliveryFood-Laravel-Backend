@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Restaurants;
+use App\Images;
+use App\Categories;
+
+use App\Http\Requests\RestaurantRequest;
+use App\Http\Requests\RestaurantEditRequest;
 
 use Illuminate\Support\Facades\Storage;
 
@@ -17,7 +23,7 @@ class RestaurantsController extends Controller
      */
     public function index()
     {
-        return view('restaurants.index', ['restaurants' => Restaurants::simplePaginate(15)]);
+        return view('restaurants.index', ['restaurants' => Restaurants::orderBy('id', 'asc')->paginate(15)]);
     }
 
     /**
@@ -27,7 +33,8 @@ class RestaurantsController extends Controller
      */
     public function create()
     {
-        return view('restaurants.create');
+        $categories = Categories::all();
+        return view('restaurants.create', ['categories' => $categories]);
     }
 
     /**
@@ -36,14 +43,31 @@ class RestaurantsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RestaurantRequest $request)
     {
-        // echo $request;
+        $category_name = (string)$request->input('category');
+
+        // Создать картинку
         $image = Storage::disk('scaleway')->put('restaurants', $request->file('image'));
-        echo 'https://ngudkov.s3.nl-ams.scw.cloud/' . $image;
-        // return Storage::url('file.txt');
-        // $request->file('image')->store('images');
-        return '';
+        $url = 'https://ngudkov.s3.nl-ams.scw.cloud/' . $image;
+        $image_record = Images::create([
+            'path' => $url,
+        ]);
+        
+        if(!$image_record) {
+            abort(500, 'Ошибка при создании ресторана!');
+        }
+
+        // Создать ресторан
+        $rest_record = Restaurants::create([
+            'name' => $request->input('name'),
+            'address' => $request->input('address'),
+            'image_id' => (string)$image_record->id,
+            'category_id' => (string)Categories::where('name', '=', $category_name)->first()->id,
+        ]);
+
+        // TODO: Редирект на создание менеджера
+        return redirect(url('restaurants'));
     }
 
     /**
@@ -52,9 +76,9 @@ class RestaurantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Restaurants $restaurant)
     {
-        //
+        return view('restaurants.show', ['restaurant' => $restaurant]);
     }
 
     /**
@@ -63,9 +87,9 @@ class RestaurantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Restaurants $restaurant)
     {
-        //
+        return view('restaurants.update', ['restaurant' => $restaurant, 'categories' => $categories = Categories::all()]);
     }
 
     /**
@@ -75,9 +99,27 @@ class RestaurantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RestaurantEditRequest $request, Restaurants $restaurant)
     {
-        //
+        $params = $request->only('name', 'address', 'category');
+        $params['category'] = (string)Categories::where('name', '=', $params['category'])->first()->id;
+        
+        if ($request->file()) {
+            $image = Storage::disk('scaleway')->put('restaurants', $request->file('image'));
+            $url = 'https://ngudkov.s3.nl-ams.scw.cloud/' . $image;
+            $image_record = Images::create([
+                'path' => $url,
+            ]);
+            
+            if(!$image_record) {
+                abort(500, 'Ошибка при создании ресторана!');
+            }
+
+            $params['image_id'] = $image_record->id;
+        }
+
+        $restaurant->update($params);
+        return redirect(url('restaurants', $restaurant->id));
     }
 
     /**
@@ -86,8 +128,9 @@ class RestaurantsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Restaurants $restaurant)
     {
-        //
+        $restaurant->delete();
+        return redirect(url('restaurants'));
     }
 }

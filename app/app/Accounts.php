@@ -29,6 +29,11 @@ class Accounts extends Model
         return $this->belongsTo('App\Roles', 'role_id', 'id');
     }
 
+    public function restaurant()
+    {
+        return $this->belongsTo('App\Restaurants', 'manager_id', 'id');
+    }
+
     public function user()
     {
         return $this->belongsTo('App\User', 'user_id', 'id');

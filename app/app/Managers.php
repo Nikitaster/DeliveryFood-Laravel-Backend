@@ -4,25 +4,24 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Images extends Model
+class Managers extends Model
 {
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'path',
+        'account_id',
     ];
 
-    public function good()
+    public function account()
     {
-        return $this->hasOne('App\Goods', 'image_id', 'id');
-    }
+        return $this->hasOne('App\Accounts', 'id', 'account_id');
+    }   
 
     public function restaurant()
     {
-        return $this->hasOne('App\Restaurants', 'image_id', 'id');
-    }
+        return $this->hasOne('App\Restaurants', 'restaurant_id', 'id');
+    }   
 }

@@ -6,9 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Restaurants extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'address', 'image_id', 'category_id', 'manager_id'
+    ];
+
     public function image()
     {
-        return $this->belongsTo('App\Images', 'user_id', 'id');
+        return $this->belongsTo('App\Images', 'image_id', 'id');
     }
 
     public function category()
@@ -24,5 +33,10 @@ class Restaurants extends Model
     public function orders()
     {
         return $this->hasMany('App\Orders', 'restaurant_id', 'id');
+    }
+
+    public function managers()
+    {
+        return $this->hasMany('App\Managers', 'restaurant_id', 'id');
     }
 }
