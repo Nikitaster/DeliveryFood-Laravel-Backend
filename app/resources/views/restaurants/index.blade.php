@@ -5,6 +5,7 @@
 
 <div class="container-fluid">
     <h1 class="text-center mb-3">Рестораны</h1>
+    <a class="btn btn-primary col-md-2 d-block m-auto" href="{{route('restaurants.create')}}">Создать</a>
     <table class="table">
     <thead class="text-center">
         <tr>
