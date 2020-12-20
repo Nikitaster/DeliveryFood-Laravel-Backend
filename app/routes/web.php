@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,3 +24,10 @@ Route::resource('managers', 'ManagersController', ['only' =>
 Route::resource('categories', 'CategoriesController', ['only' => 
         ['index', 'create', 'store', 'destroy']])
         ->middleware('can:access,App\Restaurants');
+
+Route::resource('couriers', 'CouriersController', ['only' => 
+        ['index', 'create', 'store', 'destroy']])
+        ->middleware('can:access,App\Restaurants');
+
+Route::get('/', 'FrontendController@restaurants_list');
+Route::get('/restaurant/{restaurant}', 'FrontendController@restaurant')->name('restaurant');

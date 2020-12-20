@@ -16,11 +16,14 @@ class CreateGoodsTable extends Migration
         Schema::create('goods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
+            $table->float('price');
             $table->text('description');
             $table->unsignedBigInteger('image_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->timestamps();
 
             $table->foreign('image_id')->references('id')->on('images')->onDelete('set null');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 

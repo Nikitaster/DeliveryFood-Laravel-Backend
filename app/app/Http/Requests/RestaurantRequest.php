@@ -26,7 +26,7 @@ class RestaurantRequest extends FormRequest
         return [
             'name' => 'required',
             'address' => 'required',
-            'image' => 'required',
+            'image' => 'required|image',
             'category' => 'required|exists:categories,name',
         ];
     }
