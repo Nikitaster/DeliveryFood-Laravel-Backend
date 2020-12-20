@@ -18,24 +18,24 @@
         <!-- Шапка сайта -->
         <header class="header">
             <!-- Логотип -->
-            <a href="/" class="logo"><img src="{{ asset('img/logo.svg') }}" alt="Logo" /></a>
+            <a href="/" class="logo"><img src="{{ asset('/images/logo.svg') }}" alt="Logo" /></a>
             <!-- Поле адреса -->
             <input type="text" class="input input-address" placeholder="Адрес доставки"/>
             <!-- Блок кнопок -->
             <div class="buttons">
             @guest
                 <a class="button button-primary" href="{{ route('home') }}">
-                    <img src="{{ asset('img/user.svg') }}" alt="user" class="button-icon">
+                    <img src="{{ asset('/images/user.svg') }}" alt="user" class="button-icon">
                     <span class="button-text">Войти</span>   
                 </a>
             @else
                 <a class="button button-primary" href="{{ route('home') }}">
-                    <img src="{{ asset('img/user.svg') }}" alt="user" class="button-icon">
+                    <img src="{{ asset('/images/user.svg') }}" alt="user" class="button-icon">
                     <span class="button-text">{{ Auth::user()->name }}</span>   
                 </a>
             @endguest
                 <button class="button" id="cart-button">
-                    <img src="{{ asset('img/shopping-cart.svg') }}" alt="shopping cart" class="button-icon">
+                    <img src="{{ asset('/images/shopping-cart.svg') }}" alt="shopping cart" class="button-icon">
                     <span class="button-text">Корзина</span>  
                 </button>          
             </div>
@@ -49,7 +49,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-block">
-                <img src="{{ asset('img/logo.svg') }}" alt="" class="logo footer-logo">
+                <img src="{{ asset('/images/logo.svg') }}" alt="" class="logo footer-logo">
                 <nav class="footer-nav">
                     <a href="#" class="footer-link">Ресторанам</a>
                     <a href="#" class="footer-link">Курьерам</a>
@@ -57,9 +57,9 @@
                     <a href="#" class="footer-link">Контакты</a>
                 </nav>
                 <div class="social-links">
-                    <a href="#" class="social-link"><img src="{{ asset('img/instagram.svg') }}" alt=""></a>
-                    <a href="#" class="social-link"><img src="{{ asset('img/facebook.svg') }}" alt=""></a>
-                    <a href="#" class="social-link"><img src="{{ asset('img/vk.svg') }}" alt=""></a>
+                    <a href="#" class="social-link"><img src="{{ asset('/images/instagram.svg') }}" alt=""></a>
+                    <a href="#" class="social-link"><img src="{{ asset('/images/facebook.svg') }}" alt=""></a>
+                    <a href="#" class="social-link"><img src="{{ asset('/images/vk.svg') }}" alt=""></a>
                 </div>
             </div>
         </div>

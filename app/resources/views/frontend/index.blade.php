@@ -28,7 +28,7 @@
                     <!-- /.card-heading -->
                     <div class="card-info">
                         <div class="rating">
-                            <img src="./img/rating.svg" alt="">
+                            <img src="{{asset('/images/rating.svg')}}" alt="">
                             4.5
                         </div>
                         <div class="price">От 900 ₽</div>
