@@ -17,6 +17,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('restaurants', 'RestaurantsController')->middleware('can:access,App\Restaurants');
 
+Route::resource('goods', 'GoodsController')->middleware('can:access,App\Goods');
+
 Route::resource('managers', 'ManagersController', ['only' => 
         ['create', 'show', 'store', 'destroy']])
         ->middleware('can:access,App\Restaurants');

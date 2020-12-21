@@ -39,4 +39,9 @@ class Restaurants extends Model
     {
         return $this->hasMany('App\Managers', 'restaurant_id', 'id');
     }
+
+    public function goods()
+    {
+        return $this->hasMany('App\Goods', 'restaurant_id', 'id');
+    }
 }

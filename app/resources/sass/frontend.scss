@@ -220,12 +220,16 @@ a {
     line-height: 32px;
 }
 
-.price, .category {
+.price, .category, .add-position-link {
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
     line-height: 32px;
     color: #8C8C8C;
+}
+
+.add-position-link {
+    text-decoration: none;
 }
 
 .price {
@@ -254,6 +258,10 @@ a {
     vertical-align: middle;
     border-radius: 50%;
     margin-left: 10px;
+}
+
+.add-position {
+    margin-left: auto;
 }
 
 main {
