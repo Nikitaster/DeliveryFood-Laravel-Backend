@@ -124,6 +124,7 @@ class Busket {
 
     drawCatItems() {
         document.querySelector('.cart-modal-body').innerHTML = '';
+        document.querySelector('.cart-rest-name').textContent = '';
         this.total = 0;
         for(let i = 0; i < this.items.length; ++i) {
             if (this.items[i]['amount'] > 0) {
@@ -138,11 +139,23 @@ class Busket {
         }
 
         document.querySelector('.modal-price-tag').textContent = this.total + ' ₽';
-        document.querySelector('.cart-rest-name').textContent = 'Заказ из "' + localStorage.getItem('restaurant') + '":';
+        if (localStorage.getItem('restaurant'))
+            document.querySelector('.cart-rest-name').textContent = 'Заказ из "' + localStorage.getItem('restaurant') + '":';
     }
 
     async send() {
-        const data = this.items;
+        let data = [];
+        this.items.forEach(function (item, key, items) {
+           if (Number(item['amount']) > 0) {
+               data.push(item);
+           }
+        });
+
+        if (!data.length) {
+            alert('Корзина пуста!');
+            return; 
+        }
+
         data.push({'restaurant': localStorage.getItem('restaurant')});
         data.push({'address': document.querySelector('.input-address').value});
         
@@ -167,6 +180,7 @@ class Busket {
 
         if (result.redirected){
             localStorage.clear();
+            document.querySelector('.cart-rest-name').textContent = '';
             window.location.href = result.url;
         }
         else {
@@ -199,6 +213,7 @@ addButtons.forEach(function (btn, key, addButtons) {
         let storageRestaurant = localStorage.getItem('restaurant');
         if (pageRestaurant != storageRestaurant) {
             localStorage.clear();
+            document.querySelector('.cart-rest-name').textContent = '';
             busket = new Busket();
             CreateItems();
         }
