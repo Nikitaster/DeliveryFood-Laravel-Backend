@@ -40,6 +40,6 @@ class FrontendController extends Controller
 
     public function order_confirmation(Request $request) {
         // dd($request);
-        return '<h1>ТУТ БУДЕТ СТРАНИЧКА ПОДТВЕРЖДЕНИЯ ЗАКАЗА!!! ВИДАЛИ, КАК МОГУ?!!!</h1><br>' . Auth::user()->name . '<br>' . json_encode($request->input());
+        return '<h1>ТУТ БУДЕТ СТРАНИЧКА ПОДТВЕРЖДЕНИЯ ЗАКАЗА!!! ВИДАЛИ, КАК МОГУ?!!!</h1><br>' . json_encode($request->input());
     }
 }

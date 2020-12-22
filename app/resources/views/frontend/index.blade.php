@@ -36,7 +36,20 @@
                             <img src="{{asset('/images/rating.svg')}}" alt="">
                             4.5
                         </div>
-                        <div class="price">От 900 ₽</div>
+                        @if(!$restaurant->goods->isEmpty())
+                            @php
+                                $prices = $restaurant->goods->filter(function ($item) {
+                                    return !is_null($item->price);
+                                });
+                                $min_price = $prices->min('price');
+                                $min_price = 'От ' . $min_price . ' ₽';
+                            @endphp
+                        @else 
+                            @php
+                            $min_price = "Нет позиций";
+                            @endphp
+                        @endif
+                        <div class="price">{{$min_price}}</div>
                         <div class="category"> {{ $restaurant->category->name }} </div>
                     </div>
                     <!-- /.card-info -->
