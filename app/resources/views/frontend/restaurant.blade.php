@@ -23,7 +23,7 @@
             @endauth
         </div>
         <div class="cards">
-            @foreach($restaurant->goods as $good)
+            @foreach($goods as $good)
                 <div class="card">
                     <img class="card-image" src="{{ $good->image->path }}" alt="">
                     <div class="card-text">
@@ -54,6 +54,10 @@
                 <!-- /.card -->
             @endforeach
 
+        </div>
+
+        <div class="pagination-container">
+            {{ $goods->links("pagination::bootstrap-4") }}
         </div>
     </section>
 </div>

@@ -28,7 +28,7 @@ class GoodsRequest extends FormRequest
             'description' => 'required',
             'image' => 'required|image',
             'restaurant' => 'required|exists:restaurants,name',
-            'price' => 'required',
+            'price' => 'required|integer',
         ];
     }
 }

@@ -27,7 +27,7 @@ class GoodsEditRequest extends FormRequest
             'name' => 'required',
             'description' => 'required',
             'image' => 'image',
-            'price' => 'required',
+            'price' => 'required|integer',
         ];
     }
 }

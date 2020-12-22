@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Restaurants;
+use App\Goods;
 
 class FrontendController extends Controller
 {
@@ -23,6 +24,12 @@ class FrontendController extends Controller
 
     public function restaurant($restaurant)
     {
-        return view('frontend.restaurant', ['restaurant' => Restaurants::where('name', '=', $restaurant)->first() ]);
+        $restaurant = Restaurants::where('name', '=', $restaurant)->first();
+        $goods = Goods::where('restaurant_id', '=', $restaurant->id)->paginate(6);
+
+        return view('frontend.restaurant', [
+            'restaurant' =>  $restaurant,
+            'goods' =>  $goods,
+        ]);
     }
 }
