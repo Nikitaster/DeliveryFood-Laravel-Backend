@@ -14,7 +14,7 @@ class FrontendController extends Controller
     {
         if ($request->has('name')) {
             $search = $request['name'];
-            return view('frontend.index', ['restaurants' => Restaurants::where('name', 'like', '%' . $search . '%')
+            return view('frontend.index', ['restaurants' => Restaurants::where('name_lower', 'like', '%' . strtolower($search) . '%')
                 ->paginate(6)
                 ->appends(request()->query()), 'name' => $search]);
         }
