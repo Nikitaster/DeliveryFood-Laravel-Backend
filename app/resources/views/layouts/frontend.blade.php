@@ -73,7 +73,7 @@
                 <button class="close">&times;</button>
             </div>
             <div>
-                <h3>Заказ из "<span class="cart-rest-name">НАЗВАНИЕ</span>":</h3>
+                <h3 class="cart-rest-name"></h3>
             </div>
             {{csrf_field()}}
             <!-- /.modal-header -->

@@ -138,6 +138,7 @@ class Busket {
         }
 
         document.querySelector('.modal-price-tag').textContent = this.total + ' ₽';
+        document.querySelector('.cart-rest-name').textContent = 'Заказ из "' + localStorage.getItem('restaurant') + '":';
     }
 
     async send() {
@@ -197,7 +198,6 @@ addButtons.forEach(function (btn, key, addButtons) {
         let pageRestaurant = document.querySelector('.restaurant-name').textContent;
         let storageRestaurant = localStorage.getItem('restaurant');
         if (pageRestaurant != storageRestaurant) {
-            console.log('UPDATE');
             localStorage.clear();
             busket = new Busket();
             CreateItems();
@@ -206,13 +206,9 @@ addButtons.forEach(function (btn, key, addButtons) {
         localStorage.setItem('restaurant', document.querySelector('.restaurant-name').textContent);
 
         busket.addToCart(btn.name);
-        
-        console.log(busket.items);
     }) 
 });
 
 createOrderButton.addEventListener('click', () => {
     busket.send();
 });
-
-console.log(busket.items);
