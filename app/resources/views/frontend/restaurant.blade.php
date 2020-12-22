@@ -5,7 +5,7 @@
 
     <section class="restaurants">
         <div class="section-heading">
-            <h2 class="section-title">{{ $restaurant->name }}</h2>
+            <h2 class="section-title restaurant-name">{{ $restaurant->name }}</h2>
             <div class="rating">
                 <img src="{{ asset('images/rating.svg') }}" alt="">
                 4.5
@@ -26,7 +26,7 @@
             @foreach($goods as $good)
                 <div class="card">
                     <img class="card-image" src="{{ $good->image->path }}" alt="">
-                    <div class="card-text">
+                    <div class="card-text card-text-good">
                         <div class="card-heading">
                             <h3 class="card-title card-title-reg">{{ $good->name }}</h3>
                             @auth
@@ -43,7 +43,7 @@
                         </div>
                         <!-- /.card-info -->
                         <div class="card-buttons">
-                            <button class="button button-primary">
+                            <button class="button button-primary add-to-busket-btn" name="{{$good->name}}" value="{{$good->price}}">
                                 <span class="button-card-text">В корзину</span>
                                 <img src="{{ asset('images/shopping-cart2.svg') }}" alt="shopping-cart" class="button-cart-image">
                             </button>

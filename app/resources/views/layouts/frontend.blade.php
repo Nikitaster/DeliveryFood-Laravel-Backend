@@ -10,6 +10,7 @@
     <!-- <link rel="stylesheet" href="{{asset('css/app.css')}}" /> -->
     <link rel="stylesheet" href="{{asset('css/frontend.css')}}" />
     <script defer src="{{asset('js/frontend.js')}}"></script>
+    <script defer src="{{asset('js/busket.js')}}"></script>
     <!-- <script defer src="./js/wow.min.js"></script> -->
     
 </head>
@@ -20,7 +21,7 @@
             <!-- Логотип -->
             <a href="/" class="logo"><img src="{{ asset('/images/logo.svg') }}" alt="Logo" /></a>
             <!-- Поле адреса -->
-            <input type="text" class="input input-address" placeholder="Адрес доставки"/>
+            <input type="text" class="input input-address" placeholder="Адрес доставки" name="address"/>
             <!-- Блок кнопок -->
             <div class="buttons">
             @guest
@@ -71,44 +72,12 @@
                 <h3 class="modal-title">Корзина</h3>
                 <button class="close">&times;</button>
             </div>
+            <div>
+                <h3>Заказ из "<span class="cart-rest-name">НАЗВАНИЕ</span>":</h3>
+            </div>
+            {{csrf_field()}}
             <!-- /.modal-header -->
-            <div class="modal-body">
-                <div class="food-row">
-                    <span class="food-name">Ролл угорь стандарт</span>
-                    <strong class="food-price">250₽</strong>
-                    <div class="food-counter">
-                        <button class="counter-button">-</button>
-                        <span class="counter">1</span>
-                        <button class="counter-button">+</button>
-                    </div>
-                </div>
-                <div class="food-row">
-                    <span class="food-name">Ролл угорь стандарт</span>
-                    <strong class="food-price">250₽</strong>
-                    <div class="food-counter">
-                        <button class="counter-button">-</button>
-                        <span class="counter">1</span>
-                        <button class="counter-button">+</button>
-                    </div>
-                </div>
-                <div class="food-row">
-                    <span class="food-name">Ролл угорь стандарт</span>
-                    <strong class="food-price">250₽</strong>
-                    <div class="food-counter">
-                        <button class="counter-button">-</button>
-                        <span class="counter">1</span>
-                        <button class="counter-button">+</button>
-                    </div>
-                </div>
-                <div class="food-row">
-                    <span class="food-name">Ролл угорь стандарт</span>
-                    <strong class="food-price">250₽</strong>
-                    <div class="food-counter">
-                        <button class="counter-button">-</button>
-                        <span class="counter">1</span>
-                        <button class="counter-button">+</button>
-                    </div>
-                </div>
+            <div class="modal-body cart-modal-body">
                 <div class="food-row">
                     <span class="food-name">Ролл угорь стандарт</span>
                     <strong class="food-price">250₽</strong>
@@ -123,7 +92,7 @@
             <div class="modal-footer">
                 <span class="modal-price-tag">1250 ₽</span>
                 <div class="footer-buttons">
-                    <div class="button button-primary">Оформить заказ</div>
+                    <div class="button button-primary create_order_button">Оформить заказ</div>
                     <div class="button" id="btn-close">Отмена</div>
                 </div>
             </div>

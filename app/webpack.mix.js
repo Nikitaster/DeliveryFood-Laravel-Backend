@@ -16,3 +16,5 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.js('resources/js/frontend.js', 'public/js')
     .sass('resources/sass/frontend.scss', 'public/css');
+
+mix.js('resources/js/busket.js', 'public/js');

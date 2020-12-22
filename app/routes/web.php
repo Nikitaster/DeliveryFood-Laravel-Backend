@@ -33,3 +33,6 @@ Route::resource('couriers', 'CouriersController', ['only' =>
 
 Route::get('/', 'FrontendController@restaurants_list');
 Route::get('/restaurant/{restaurant}', 'FrontendController@restaurant')->name('restaurant');
+
+Route::post('/create-order', 'FrontendController@create_order');
+Route::get('/order-confirmation', 'FrontendController@order_confirmation')->name('order_confirmation');

@@ -1,6 +1,7 @@
 const cartButton = document.querySelector('#cart-button');
 const closeModalButton = document.querySelector('.close');
 const modal = document.querySelector('.modal');
+const modalDialog = document.querySelector('.modal-dialog');
 const hideModal = document.querySelector('#btn-close');
 
 const ToggleModal = (event) => {
