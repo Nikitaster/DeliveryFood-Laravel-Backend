@@ -533,6 +533,12 @@ footer {
 
 /* media */
 
+@media (min-width: 2000px) {
+    .container {
+        max-width: 1800px;
+    }
+}
+
 @media (max-width: 1366px) {
     .container {
         max-width: 960px;
