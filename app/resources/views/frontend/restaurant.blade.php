@@ -17,6 +17,8 @@
                     @if(Auth::user()->account->manager->restaurant->id === $restaurant->id)
                         <div class="add-position"><a href="{{route('goods.create', 'restaurant='.$restaurant->name)}}">Добавить позицию</a></div>
                     @endif
+                @elseif(Auth::user()->account->role->name == 'admin')
+                <div class="add-position"><a href="{{route('restaurants.show', $restaurant->id)}}">Редактировать ресторан</a></div>
                 @endif
             @endauth
         </div>

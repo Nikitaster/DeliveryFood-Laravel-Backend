@@ -27,10 +27,10 @@ class ManagersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Restaurants $rest = NULL)
+    public function create(Request $req)
     {
         return view('managers.create', ['restaurants' => Restaurants::all(),
-                                        'curr_restaurant' => $rest,
+                                        'curr_restaurant' => Restaurants::find($req->input('restaurant')),
                                         ]);
     }
 

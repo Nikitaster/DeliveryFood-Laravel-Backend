@@ -8,6 +8,11 @@
     </section>
 
     <section class="restaurants">
+        @auth
+            @if(Auth::user()->account->role->name == 'admin')
+                <div class="add-position"><a href="{{route('restaurants.create')}}">Добавить ресторан</a></div>
+            @endif
+        @endauth
         <div class="section-heading">
             <h2 class="section-title">Рестораны</h2>
             <form method='GET' action='' class="restaurant-search-form">

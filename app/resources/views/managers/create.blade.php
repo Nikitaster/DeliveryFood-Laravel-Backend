@@ -67,8 +67,7 @@
 
             <div class="col-md-6">
                 @if ($curr_restaurant)
-                <h1>12312312</h1>
-                    <input list="restaurantsList"  placeholder="Начните писать или выберите ресторан" id="restaurant" type="text" class="form-control @error('restaurant') is-invalid @enderror" name="restaurant" value="{{ $curr_restaurant }}" required  disabled>
+                    <input list="restaurantsList"  placeholder="Начните писать или выберите ресторан" id="restaurant" type="text" class="form-control @error('restaurant') is-invalid @enderror" name="restaurant" value="{{ $curr_restaurant->name }}" required  disabled>
                 @else
                     <input list="restaurantsList"  placeholder="Начните писать или выберите ресторан" id="restaurant" type="text" class="form-control @error('restaurant') is-invalid @enderror" name="restaurant" value="{{ old('restaurant') }}" required autocomplete="restaurant">
                     <datalist id="restaurantsList">

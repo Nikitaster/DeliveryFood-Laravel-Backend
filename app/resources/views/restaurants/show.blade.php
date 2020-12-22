@@ -36,6 +36,11 @@
                 </div>
             </form>
 
+            <form>
+                <div class="row ml-auto mr-auto">
+                    <a class="btn btn-secondary m-auto" href="{{route('managers.create', ['restaurant' => $restaurant->id])}}">Добавить менеджера</a>
+                </div>
+            </form>
 
             <form method="get" action="{{url()->current()}}/edit" enctype="multipart/form-data">
                 <div class="row ml-auto mr-auto mb-3">
