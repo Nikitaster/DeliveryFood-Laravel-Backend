@@ -61,6 +61,7 @@ class RestaurantsController extends Controller
         // Создать ресторан
         $rest_record = Restaurants::create([
             'name' => $request->input('name'),
+            'name_lower' => strtolower($request->input('name')),
             'address' => $request->input('address'),
             'image_id' => (string)$image_record->id,
             'category_id' => (string)Categories::where('name', '=', $category_name)->first()->id,
@@ -103,6 +104,7 @@ class RestaurantsController extends Controller
     public function update(RestaurantEditRequest $request, Restaurants $restaurant)
     {
         $params = $request->only('name', 'address', 'category');
+        $params['name_lower'] = strtolower($request->input('name'));
         $params['category'] = (string)Categories::where('name', '=', $params['category'])->first()->id;
         
         if ($request->file()) {
