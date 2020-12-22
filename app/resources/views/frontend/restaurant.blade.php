@@ -13,8 +13,10 @@
             <div class="price">От 900 ₽</div>
             <div class="category">{{ $restaurant->category->name }}</div>
             @auth
-                @if(Auth::user()->account->manager->restaurant->id === $restaurant->id)
-                    <div class="add-position"><a href="{{route('goods.create', 'restaurant='.$restaurant->name)}}">Добавить позицию</a></div>
+                @if(Auth::user()->account->role->name == 'manager')
+                    @if(Auth::user()->account->manager->restaurant->id === $restaurant->id)
+                        <div class="add-position"><a href="{{route('goods.create', 'restaurant='.$restaurant->name)}}">Добавить позицию</a></div>
+                    @endif
                 @endif
             @endauth
         </div>
@@ -26,8 +28,10 @@
                         <div class="card-heading">
                             <h3 class="card-title card-title-reg">{{ $good->name }}</h3>
                             @auth
-                                @if(Auth::user()->account->manager->restaurant->id === $restaurant->id)
-                                <div class="add-position"><a href="{{route('goods.edit', $good->id)}}">Редактировать</a></div>
+                                @if(Auth::user()->account->role->name == 'manager')
+                                    @if(Auth::user()->account->manager->restaurant->id === $restaurant->id)
+                                    <div class="add-position"><a href="{{route('goods.edit', $good->id)}}">Редактировать</a></div>
+                                    @endif
                                 @endif
                             @endauth
                         </div>
