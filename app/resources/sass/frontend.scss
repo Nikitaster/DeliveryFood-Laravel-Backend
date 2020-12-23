@@ -142,9 +142,13 @@ a {
     margin-bottom: 30px;
     flex-basis: 31%;
     text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
 }
 
 .card-image {
+    align-self: center;
     width: 384px;
     height: 250px;
     object-fit: cover;
