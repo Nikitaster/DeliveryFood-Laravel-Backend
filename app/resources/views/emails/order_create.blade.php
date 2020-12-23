@@ -30,10 +30,10 @@
             foreach($positions as $position) {
                 echo    '<tr>' . '<th scope="row">' . $position[0]->name . '</th>' .
                     '<td>' . $position[1] . '</td>' .
-                    '<td>' . (int)$position[0]->price * (int)$position[1] . '</td>' .
+                    '<td>' . (int)$position[0]->price * (int)$position[1] . ' ₽' . '</td>' .
                 '</tr>';
             }
-            echo '<tr><th><td><td>' . $order->total . '</td></td></th></tr>';
+            echo '<tr><th>Итого:</th><td></td><td>' . $order->total . ' ₽' . '</td></tr>';
             @endphp
         </tbody>
     </table>
