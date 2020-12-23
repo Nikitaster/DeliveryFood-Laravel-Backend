@@ -138,23 +138,26 @@ class Busket {
             }
         }
 
-        document.querySelector('.modal-price-tag').textContent = this.total + ' ₽';
+        document.querySelector('.total-price').textContent = this.total + ' ₽';
         if (localStorage.getItem('restaurant'))
             document.querySelector('.cart-rest-name').textContent = 'Заказ из "' + localStorage.getItem('restaurant') + '":';
     }
 
     async send() {
         let data = [];
+        let goods = []
         this.items.forEach(function (item, key, items) {
            if (Number(item['amount']) > 0) {
-               data.push(item);
+               goods.push(item);
            }
         });
 
-        if (!data.length) {
+        if (!goods.length) {
             alert('Корзина пуста!');
             return; 
         }
+
+        data.push({'goods': goods});
 
         data.push({'restaurant': localStorage.getItem('restaurant')});
         data.push({'address': document.querySelector('.input-address').value});

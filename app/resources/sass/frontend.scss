@@ -47,6 +47,26 @@ a {
     background-image: url(/images/home.svg);
 }
 
+.input-address-delivery {
+    flex: 0.8;
+    background-image: url(/images/house.svg);
+}
+
+.input-fio {
+    flex: 0.8;
+    background-image: url(/images/person.svg);
+}
+
+.input-phone {
+    flex: 0.8;
+    background-image: url(/images/telephone.svg);
+}
+
+.input-email {
+    flex: 0.8;
+    background-image: url(/images/envelope.svg);
+}
+
 .buttons {
     display: flex;
     align-items: center;
@@ -353,6 +373,19 @@ footer {
     margin-bottom: 52px;
 }
 
+.form-confirmation {
+    display: flex; 
+    flex-direction: column;
+}
+
+.form-confirmation > span {
+    margin-bottom: 6px;
+}
+
+.form-confirmation > div > input {
+    width: 100%;
+}
+
 .close {
     font-size: 36px;
     border: none;
@@ -366,6 +399,10 @@ footer {
     padding-bottom: 8px;
     border-bottom: 1px solid #D9D9D9;
     margin-bottom: 15px;
+}
+
+.food-row-order-confirmation {
+    align-items: center;
 }
 
 .food-name {
@@ -653,6 +690,27 @@ footer {
     .footer {
         padding: 30px 0;
     }
+    .food-row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .food-name {
+        flex-basis: 100%;
+    }
+    .food-price {
+        flex-basis: 100%;
+    }
+    .counter {
+        margin: 0;
+    }
+    .modal-footer {
+        flex-wrap: wrap;
+    }
+    .modal-price-tag {
+        flex-basis: 100%;
+        margin-bottom: 12px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -686,5 +744,11 @@ footer {
     }
     .button-icon {
         margin: 0;
+    }
+    .footer-buttons {
+        flex-wrap: wrap;
+    }
+    .footer-buttons > .button:not(:last-child) {
+        margin-bottom: 12px;
     }
 }

@@ -21,7 +21,7 @@
             <!-- Логотип -->
             <a href="/" class="logo"><img src="{{ asset('/images/logo.svg') }}" alt="Logo" /></a>
             <!-- Поле адреса -->
-            <input type="text" class="input input-address" placeholder="Адрес доставки" name="address"/>
+            <input type="text" class="input input-address" placeholder="Адрес доставки" name="address" @auth value="{{Auth::user()->account->address}}" @endauth/>
             <!-- Блок кнопок -->
             <div class="buttons">
             @guest
@@ -90,7 +90,7 @@
             </div>
             <!-- /.modal-body -->
             <div class="modal-footer">
-                <span class="modal-price-tag">1250 ₽</span>
+                <span class="modal-price-tag total-price">1250 ₽</span>
                 <div class="footer-buttons">
                     <div class="button button-primary create_order_button">Оформить заказ</div>
                     <div class="button" id="btn-close">Отмена</div>
