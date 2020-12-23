@@ -11,7 +11,7 @@
     </style>
 
     <h1>Информация о заказе</h1>
-    <p><strong>{{$order->fio}}</strong>, ваш заказ на сумму <strong>{{$order->total}} ₽ </strong> успешно подтвержден!</p>
+    <p><strong>{{$order->fio}}</strong>, ваш заказ на сумму <strong>{{$order->total}} ₽ </strong> из "{{$order->restaurant->name}}" успешно подтвержден!</p>
     <p>Ожидайте курьера в течении часа.</p>
     
     <br>

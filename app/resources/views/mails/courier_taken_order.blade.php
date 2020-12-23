@@ -11,7 +11,7 @@
     </style>
 
     <h1>Заказ уже в пути</h1>
-    <p><strong>{{$order->fio}}</strong>, курьер уже в пути! Ваш заказ на сумму <strong>{{$order->total}} ₽ </strong> скоро будет у вас!</p>
+    <p><strong>{{$order->fio}}</strong>, курьер уже в пути! Ваш заказ на сумму <strong>{{$order->total}} ₽ </strong> из "{{$order->restaurant->name}}" скоро будет у вас!</p>
     <p>Связаться с курьером ({{$courier->fio}}): {{$courier->phone}}</p>
     
     <br>
