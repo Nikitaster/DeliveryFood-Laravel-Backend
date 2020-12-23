@@ -8,6 +8,9 @@ use App\OrdersOnQueue;
 use App\Restaurants;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderCreateMail;
+
 class OrdersController extends Controller
 {
     /**
@@ -41,12 +44,14 @@ class OrdersController extends Controller
         $orders_on_queue = OrdersOnQueue::find($request->input('order_on_queue'));
         $params = $request->only('fio', 'tel', 'email', 'address');
         $params['goods'] = $orders_on_queue->goods;
+        $params['total'] = $orders_on_queue->total;
         $params['restaurant_id'] = Restaurants::find($orders_on_queue->restaurant_id)->id;
         $params['status_id'] = Statuses::where('name', '=', 'Подтвержден')->first()->id;
 
         $order = Orders::create($params);
 
         // TODO: send email 
+        Mail::to($params['email'], $params['fio'])->send(new OrderCreateMail($order));
 
         return redirect(route('orders.show', $order->id));
     }
@@ -59,7 +64,7 @@ class OrdersController extends Controller
      */
     public function show(Orders $order)
     {
-        echo "тут будет страничка с инфомрацией по заказу"
+        echo "тут будет страничка с инфомрацией по заказу";
         dd($order);
         return '';
     }

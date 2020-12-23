@@ -13,7 +13,7 @@ class Orders extends Model
      */
     protected $fillable = [
         'client_id', 'restaurant_id', 'status_id', 'courier_id', 'goods',
-        'FIO', 'tel', 'email', 'address',
+        'fio', 'tel', 'email', 'address', 'total',
     ];
 
     public function status()

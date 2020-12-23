@@ -9,6 +9,6 @@ class OrdersOnQueue extends Model
     protected $table = 'orders_on_queue';
 
     protected $fillable = [
-        'goods', 'restaurant_id',
+        'goods', 'restaurant_id', 'total',
     ];
 }

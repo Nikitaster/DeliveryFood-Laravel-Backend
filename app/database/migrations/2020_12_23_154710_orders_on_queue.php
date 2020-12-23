@@ -17,6 +17,7 @@ class OrdersOnQueue extends Migration
             $table->bigIncrements('id');
             $table->json('goods');
             $table->unsignedBigInteger('restaurant_id');
+            $table->string('total');
             $table->timestamps();
         });
     }

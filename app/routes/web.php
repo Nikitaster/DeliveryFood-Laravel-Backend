@@ -31,7 +31,7 @@ Route::resource('couriers', 'CouriersController', ['only' =>
         ['index', 'create', 'store', 'destroy']])
         ->middleware('can:access,App\Restaurants');
 
-Route::get('/', 'FrontendController@restaurants_list');
+Route::get('/', 'FrontendController@restaurants_list')->name('index');
 Route::get('/restaurant/{restaurant}', 'FrontendController@restaurant')->name('restaurant');
 
 Route::post('/create-order', 'FrontendController@create_order');

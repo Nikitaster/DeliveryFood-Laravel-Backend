@@ -19,7 +19,7 @@
         <!-- Шапка сайта -->
         <header class="header">
             <!-- Логотип -->
-            <a href="/" class="logo"><img src="{{ asset('/images/logo.svg') }}" alt="Logo" /></a>
+            <a href="{{route('index')}}" class="logo"><img src="{{ asset('/images/logo.svg') }}" alt="Logo" /></a>
             <!-- Поле адреса -->
             <input type="text" class="input input-address" placeholder="Адрес доставки" name="address" @auth value="{{Auth::user()->account->address}}" @endauth/>
             <!-- Блок кнопок -->

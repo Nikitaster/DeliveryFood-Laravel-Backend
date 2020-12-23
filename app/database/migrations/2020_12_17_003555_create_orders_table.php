@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('tel');
             $table->string('email');
             $table->string('address');
+            $table->string('total');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('accounts')->onDelete('set null');

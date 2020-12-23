@@ -86,6 +86,7 @@ class FrontendController extends Controller
             $order = OrdersOnQueue::create([
                 'goods' => json_encode($goods),
                 'restaurant_id' => $restaurant->id,
+                'total' => $total,
             ]);
 
             return view('frontend.order_confirmation', [
