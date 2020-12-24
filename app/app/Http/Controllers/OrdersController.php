@@ -7,6 +7,7 @@ use App\Statuses;
 use App\OrdersOnQueue;
 use App\Restaurants;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCreateMail;
@@ -47,6 +48,10 @@ class OrdersController extends Controller
         $params['total'] = $orders_on_queue->total;
         $params['restaurant_id'] = Restaurants::find($orders_on_queue->restaurant_id)->id;
         $params['status_id'] = Statuses::where('name', '=', 'Подтвержден')->first()->id;
+
+        if (Auth::check()) {
+            $params['client_id'] = Auth::user()->account->id;
+        }
 
         $order = Orders::create($params);
 
