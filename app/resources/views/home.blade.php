@@ -13,6 +13,8 @@
                     <div class="card-header">Личный кабинет Менеджера</div>
                 @elseif(Auth::user()->account->role->name == 'admin')
                     <div class="card-header">Личный кабинет Администратора</div>
+                @elseif(Auth::user()->account->role->name == 'courier')
+                    <div class="card-header">Личный кабинет Курьера</div>
                 @else
                     <div class="card-header">Личный кабинет Пользователя</div>
                 @endif
@@ -88,13 +90,47 @@
                                 </h2>
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                <div class="card-body">
-                                <div class="list-group">
-                                        <a href="{{route('restaurants.index')}}" class="list-group-item list-group-item-action">Рестораны</a>
-                                        <a href="{{route('categories.create')}}" class="list-group-item list-group-item-action">Создать категорию для ресторанов</a>
-                                        <a href="{{route('couriers.index')}}" class="list-group-item list-group-item-action">Курьеры</a>
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <a href="{{route('restaurants.index')}}" class="list-group-item list-group-item-action">Рестораны</a>
+                                            <a href="{{route('categories.index')}}" class="list-group-item list-group-item-action">Категории ресторанов</a>
+                                            <a href="{{route('couriers.index')}}" class="list-group-item list-group-item-action">Курьеры</a>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            @elseif(Auth::user()->account->role->name == 'courier')
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Панель курьера
+                                    </button>
+                                </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <a href="" class="list-group-item list-group-item-action">Открытые заказы</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @elseif(Auth::user()->account->role->name == 'manager')
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Панель менеджера
+                                    </button>
+                                </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="list-group">
+                                            <a href="{{route('restaurant', Auth::user()->account->manager->restaurant->name)}}" class="list-group-item list-group-item-action">Ресторан "{{Auth::user()->account->manager->restaurant->name}}"</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endif
