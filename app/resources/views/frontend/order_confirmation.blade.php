@@ -43,7 +43,7 @@
 
                     <span>Телефон:</span>
                     <div style="margin-bottom: 12px;">
-                        <input type="tel" class="input input-phone" name="tel" @auth value="{{Auth::user()->account->hone}}" @endauth required>
+                        <input type="tel" class="input input-phone" name="tel" @auth value="{{Auth::user()->account->phone}}" @endauth required>
                     </div> 
 
                     <span>Адрес доставки:</span>
