@@ -62,27 +62,27 @@ a {
 
 .input-address {
     flex: 0.8;
-    background-image: url(/images/home.svg);
+    background-image: url({{asset('images/home.svg')}});
 }
 
 .input-address-delivery {
     flex: 0.8;
-    background-image: url(/images/house.svg);
+    background-image: url({{asset('images/house.svg')}});
 }
 
 .input-fio {
     flex: 0.8;
-    background-image: url(/images/person.svg);
+    background-image: url({{asset('images/person.svg')}});
 }
 
 .input-phone {
     flex: 0.8;
-    background-image: url(/images/telephone.svg);
+    background-image: url({{asset('images/telephone.svg')}});
 }
 
 .input-email {
     flex: 0.8;
-    background-image: url(/images/envelope.svg);
+    background-image: url({{asset('images/envelope.svg')}});
 }
 
 .buttons {
@@ -124,7 +124,7 @@ a {
 /* Section Promo */
 .promo {
     filter: drop-shadow(0px 7px 12px rgba(158, 158, 163, 0.1));
-    background: #FFF1B8 url(/images/promo-image.png) no-repeat top -150px right -200px / 800px;  /* / ширина */
+    background: #FFF1B8 url({{asset('images/promo-image.png')}}) no-repeat top -150px right -200px / 800px;  /* / ширина */
     border-radius: 10px;
     padding: 68px 590px 69px 70px;
     margin-bottom: 56px;
@@ -161,7 +161,7 @@ a {
 
 .input-search {
     width: 300px;
-    background-image: url(/images/search.svg);
+    background-image: url({{asset('images/search.svg')}});
     margin-left: auto;
 }
 
