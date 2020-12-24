@@ -25,8 +25,10 @@ class AddIPToOrder extends Migration
      */
     public function down()
     {
-        Schema::table('orders', function (Blueprint $table) {
-            Schema::dropColumn('created_from_ip');
+        Schema::table('orders', function($table) {
+            $table->dropColumn([
+                'created_from_ip',
+            ]);
         });
     }
 }
