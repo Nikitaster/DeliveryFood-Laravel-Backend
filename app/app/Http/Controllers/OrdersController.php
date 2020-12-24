@@ -127,7 +127,7 @@ class OrdersController extends Controller
             abort(403);
         }
         $order->update([
-            'status_id' => Statuses::all()->last()->id,
+            'status_id' => Statuses::where('name', '=', 'Завершен')->first()->id,
         ]);
         $order->save();
         

@@ -59,7 +59,7 @@
                 <span class="modal-price-tag order-total">{{$order->total}} ₽</span>
                 <div class="footer-buttons">
                     @auth
-                        @if(Auth::user()->account->role->name == 'courier')
+                        @if(Auth::user()->account->role->name == 'courier' && $order->courier)
                             <form action="{{route('order_complete', $order->id)}}" method="POST">
                                 {{csrf_field()}}
                                 <button type="submit" class="button button-primary" name="order" value="{{$order->id}}">Завершить доставку</button>
