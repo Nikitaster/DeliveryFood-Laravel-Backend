@@ -77,7 +77,7 @@
         </div>
 
         <div class="form-group row">
-            <label for="phone-input" class="col-md-4 col-form-label text-md-right">{{ __('FIO') }}</label>
+            <label for="phone-input" class="col-md-4 col-form-label text-md-right">{{ __('phone') }}</label>
 
             <div class="col-md-6">
                 <input id="phone-input" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="+7(123)456-78-90" autofocus placeholder="+7(123)456-78-90">

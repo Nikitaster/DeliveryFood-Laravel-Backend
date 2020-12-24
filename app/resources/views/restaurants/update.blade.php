@@ -32,7 +32,9 @@
                 @enderror
             </div>
             <div class="row">
-                <p for="formFile" class="form-label col-md-6 m-auto">Категория:</p>
+                <div class="col-md-6 m-auto">
+                <span for="formFile" class="form-label">Категория:</span>
+                <a href="{{route('categories.create')}}">(добавить)</a></div>
             </div>
             <div class="mb-3">
                 <select class="form-control col-md-6 m-auto @error('category') is-invalid @enderror" type="text" name="category" required >

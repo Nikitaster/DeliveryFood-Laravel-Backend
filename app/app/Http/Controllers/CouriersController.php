@@ -68,6 +68,8 @@ class CouriersController extends Controller
                 abort(500, 'Ошибка при создании курьера!');
             }
         }
+
+        return redirect(route('couriers.index'));
     }
 
     /**
