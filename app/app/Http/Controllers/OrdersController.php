@@ -74,10 +74,12 @@ class OrdersController extends Controller
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $order)
+    public function show(Orders $order, Request $request)
     {
         if (! Gate::forUser(Auth::user())->allows('order-access', $order)) {
-            abort(403);
+            if($request->ip() != $order->created_from_ip) {
+                abort(403);
+            }
         }
 
         return view('orders.show', ['order' => $order]);
