@@ -55,6 +55,7 @@ class OrdersController extends Controller
         $params['total'] = $orders_on_queue->total;
         $params['restaurant_id'] = Restaurants::find($orders_on_queue->restaurant_id)->id;
         $params['status_id'] = Statuses::where('name', '=', 'Подтвержден')->first()->id;
+        $params['created_from_ip'] = $request->ip();
 
         if (Auth::check()) {
             $params['client_id'] = Auth::user()->account->id;
