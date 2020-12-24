@@ -20,6 +20,7 @@ insert into roles (name) values ('manager');
 insert into roles (name) values ('courier');
 
 -- fill statuses table
+insert into statuses (name) values ('Отменен');
 insert into statuses (name) values ('Не подтвержден');
 insert into statuses (name) values ('Подтвержден');
 insert into statuses (name) values ('Доставка');

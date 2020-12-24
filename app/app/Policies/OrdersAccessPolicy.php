@@ -45,7 +45,7 @@ class OrdersAccessPolicy
         // Курьер этого заказа
         $is_courier = false;
         if($order->courier) {
-            $is_courier = ($order->courier->account->user->id == $user->id) ? true : false;
+            $is_courier = ($order->courier->user->id == $user->id) ? true : false;
         }
 
         // Клиент, оформивший заказ

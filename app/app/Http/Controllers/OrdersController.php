@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCreateMail;
 use App\Mail\OrderCompleteMail;
+use App\Mail\CourierTakenOrderMail;
 
 use Illuminate\Support\Facades\Gate;
+
+use App\Http\Requests\AttachOrderToCourier;
 
 class OrdersController extends Controller
 {
@@ -111,7 +114,8 @@ class OrdersController extends Controller
      */
     public function destroy(Orders $order)
     {
-        //
+        $order->update(['status_id' => Statuses::where('name', '=', 'Отменен')->first()->id]);
+        return redirect(route('orders.show', $order->id));
     }
 
     public function complete(Orders $order)
@@ -133,5 +137,47 @@ class OrdersController extends Controller
         Mail::to($order->email, $order->fio)->send(new OrderCompleteMail($order, $rate_token));
 
         return '<p>Заказ #' . $order->id . ' завершен!</p><br><a href="' . route('home') . '">К панели</a>';
+    }
+
+    public function opened_orders_list()
+    {
+        $current_orders = Auth::user()->account->courier_orders;
+
+        $opened_orders = Orders::where('status_id', '=', Statuses::where('name', '=', 'Подтвержден')->first()->id);
+        
+        if (!$current_orders->isEmpty()) {
+            // показывать только заказы из текущего ресторана    
+            $opened_orders = $opened_orders->where('restaurant_id', '=', 1);
+        }
+
+        return view('orders.list', ['order' => $opened_orders->paginate(1)]);
+    }
+
+    public function couriers_attach_order(AttachOrderToCourier $request) {
+        if (Auth::user()->account->role->name != 'courier') {
+            abort('403', 'Доступно только курьерам!');
+        }
+        $order = Orders::find($request->input('order_id'));
+        $order->courier_id = Auth::user()->account->id;
+        $order->status_id = Statuses::where('name', '=', 'Доставка')->first()->id;
+        $order->save();
+
+        // email
+        Mail::to($order->email, $order->fio)->send(new CourierTakenOrderMail($order, Auth::user()->account));
+
+        return redirect(route('orders.show', $order->id));
+    }
+
+    public function couriers_orders_list()
+    {   
+        if (Auth::user()->account->role->name != 'courier') {
+            abort('403', 'Доступно только курьерам!');
+        }
+        $orders = Orders::where('courier_id', '=', Auth::user()->account->id)
+            ->where('status_id', '=', Statuses::where('name', '=', 'Доставка')->first()->id);
+        if(!$orders->get()->isEmpty()) {
+            return view('orders.courier_list', ['order' => $orders->paginate(1)]);
+        }
+        return view('orders.courier_list', ['order' => NULL]);
     }
 }

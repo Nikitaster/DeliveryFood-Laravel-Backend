@@ -28,7 +28,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{asset('images/logo.svg')}}" class="d-inline-block align-top">
+                    <!-- {{ config('app.name', 'Laravel') }} -->
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -77,9 +78,15 @@
                                         <a class="dropdown-item" href="{{route('couriers.index')}}">
                                         Курьеры
                                         </a>
-                                    @elseif(Auth::user()->account->role->name == 'courier')
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="{{route('opened_orders')}}">
                                         Открытые заказы
+                                        </a>
+                                    @elseif(Auth::user()->account->role->name == 'courier')
+                                        <a class="dropdown-item" href="{{route('opened_orders')}}">
+                                        Открытые заказы
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('couriers_orders_list')}}">
+                                        Заказы в работе
                                         </a>
                                     @endif
 

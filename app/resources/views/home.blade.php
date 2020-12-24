@@ -111,7 +111,8 @@
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="list-group">
-                                            <a href="" class="list-group-item list-group-item-action">Открытые заказы</a>
+                                            <a href="{{route('opened_orders')}}" class="list-group-item list-group-item-action">Открытые заказы</a>
+                                            <a href="{{route('couriers_orders_list')}}" class="list-group-item list-group-item-action">Заказы в работе</a>
                                         </div>
                                     </div>
                                 </div>

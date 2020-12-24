@@ -37,11 +37,14 @@ Route::get('/restaurant/{restaurant}', 'FrontendController@restaurant')->name('r
 Route::post('/create-order', 'FrontendController@create_order');
 Route::get('/order-confirmation', 'FrontendController@order_confirmation')->name('order_confirmation');
 Route::get('/order-cancel/{id}', 'FrontendController@order_cancel')->name('order_cancel');
+Route::get('/opened-orders', 'OrdersController@opened_orders_list')->name('opened_orders');
 
 Route::resource('orders', 'OrdersController', ['only' => 
 ['show', 'store', 'destroy']]);
 
 Route::post('order-completing/{order}', 'OrdersController@complete')->name('order_complete');
+Route::post('/courier/attach-order/', 'OrdersController@couriers_attach_order')->name('couriers_attach_order');
+Route::get('/courier/orders/', 'OrdersController@couriers_orders_list')->name('couriers_orders_list');
 
 Route::post('/accounts/{id}', 'AccountController@update')->name('accounts_update');
 
