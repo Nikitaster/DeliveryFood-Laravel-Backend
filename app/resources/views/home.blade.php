@@ -95,6 +95,7 @@
                                             <a href="{{route('restaurants.index')}}" class="list-group-item list-group-item-action">Рестораны</a>
                                             <a href="{{route('categories.index')}}" class="list-group-item list-group-item-action">Категории ресторанов</a>
                                             <a href="{{route('couriers.index')}}" class="list-group-item list-group-item-action">Курьеры</a>
+                                            <a href="{{route('opened_orders')}}" class="list-group-item list-group-item-action">Открытые заказы</a>
                                         </div>
                                     </div>
                                 </div>

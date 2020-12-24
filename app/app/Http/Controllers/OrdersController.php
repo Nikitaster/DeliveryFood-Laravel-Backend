@@ -144,7 +144,6 @@ class OrdersController extends Controller
 
     public function opened_orders_list()
     {
-        // $current_orders = Auth::user()->account->courier_orders;
         $current_orders = Orders::where('courier_id', '=', Auth::user()->account->id)
             ->where('status_id', '=', Statuses::where('name', '=', 'Доставка')->first()->id);
 
