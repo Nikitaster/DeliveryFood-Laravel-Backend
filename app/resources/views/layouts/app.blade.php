@@ -59,11 +59,36 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('home') }}">
+                                        Личный кабинет
+                                    </a>
+                                
+                                    @if(Auth::user()->account->role->name == 'manager')
+                                        <a class="dropdown-item" href="{{route('restaurant', Auth::user()->account->manager->restaurant->name)}}">
+                                        Ресторан "{{Auth::user()->account->manager->restaurant->name}}"
+                                        </a>
+                                    @elseif(Auth::user()->account->role->name == 'admin')
+                                        <a class="dropdown-item" href="{{route('restaurants.index')}}">
+                                        Рестораны
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('categories.index')}}">
+                                        Категории ресторанов
+                                        </a>
+                                        <a class="dropdown-item" href="{{route('couriers.index')}}">
+                                        Курьеры
+                                        </a>
+                                    @elseif(Auth::user()->account->role->name == 'courier')
+                                        <a class="dropdown-item" href="">
+                                        Открытые заказы
+                                        </a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
