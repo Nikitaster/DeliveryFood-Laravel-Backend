@@ -138,18 +138,36 @@
                             <div class="card-header" id="headingThree">
                             <h2 class="mb-0">
                                 <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
+                                История заказов
                                 </button>
                             </h2>
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
+                                <div class="card-body" style="overflow-x: auto">
+                                    <table class="table text-center">
+                                        <thead>
+                                            <tr>
+                                            <th scope="col">Заказ №</th>
+                                            <th scope="col">На сумму</th>
+                                            <th scope="col">Статус</th>
+                                            <th scope="col">Дата</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach(Auth::user()->account->own_orders as $order)
+                                                <tr> 
+                                                <th scope="row"><a href="{{route('orders.show', $order->id)}}">{{$order->id}}</a></th>
+                                                <td>{{$order->total}} ₽</td>
+                                                <td>{{$order->status->name}}</td>
+                                                <td>{{$order->created_at}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        </div>
-
+                    </div>
                 </div>
             </div>
         </div>
