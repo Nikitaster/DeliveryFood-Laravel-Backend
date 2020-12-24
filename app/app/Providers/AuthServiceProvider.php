@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use App\Policies\OrdersAccessPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('order-access', [OrdersAccessPolicy::class, 'access']);
     }
 }

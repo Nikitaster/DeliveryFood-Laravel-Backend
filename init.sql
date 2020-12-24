@@ -23,4 +23,4 @@ insert into roles (name) values ('courier');
 insert into statuses (name) values ('Не подтвержден');
 insert into statuses (name) values ('Подтвержден');
 insert into statuses (name) values ('Доставка');
-insert into statuses (name) values ('Доставлен');
+insert into statuses (name) values ('Завершен');

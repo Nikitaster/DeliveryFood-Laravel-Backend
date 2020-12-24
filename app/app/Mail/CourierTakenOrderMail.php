@@ -2,14 +2,16 @@
 
 namespace App\Mail;
 
+
 use App\Orders;
+use App\Accounts;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderComplete extends Mailable
+class CourierTakenOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,23 +21,18 @@ class OrderComplete extends Mailable
      * @var Order
      */
     protected $order;
-    
-    /**
-     * The rate tokne instance for rating.
-     *
-     * @var string
-     */
-    protected $rate_token;
-    public $subject = 'Заказ завершен';
+    protected $courier;
+
+    public $subject = 'Заказ уже в пути';
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Orders $order, $rate_token)
+    public function __construct(Orders $order, Accounts $courier)
     {
         $this->order = $order;
-        $this->rate_token = $rate_token;
+        $this->courier = $courier;
     }
 
     /**
@@ -45,9 +42,9 @@ class OrderComplete extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.order_complete')->with([
+        return $this->view('mails.courier_taken_order')->with([
             'order' => $this->order,
-            'rate_token' => $this->rate_token,
+            'courier' => $this->courier,
         ]);
     }
 }

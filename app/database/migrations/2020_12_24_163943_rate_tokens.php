@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRateTable extends Migration
+class RateTokens extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateRateTable extends Migration
      */
     public function up()
     {
-        Schema::create('rate', function (Blueprint $table) {
+        Schema::create('rate_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('rate');
+            $table->string('token')->uniqie();
             $table->unsignedBigInteger('restaurant_id');
-            $table->unsignedBigInteger('author_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('set null');
-            $table->foreign('author_id')->references('id')->on('accounts')->onDelete('set null');
+            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateRateTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rate');
+        Schema::dropIfExists('rate_tokens');
     }
 }

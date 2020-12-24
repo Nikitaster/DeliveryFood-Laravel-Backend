@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Orders;
+use App\RateTokens;
 use App\Statuses;
 use App\OrdersOnQueue;
 use App\Restaurants;
@@ -11,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCreateMail;
+use App\Mail\OrderCompleteMail;
+
+use Illuminate\Support\Facades\Gate;
 
 class OrdersController extends Controller
 {
@@ -55,7 +59,7 @@ class OrdersController extends Controller
 
         $order = Orders::create($params);
 
-        // TODO: send email 
+        // send email 
         Mail::to($params['email'], $params['fio'])->send(new OrderCreateMail($order));
 
         return redirect(route('orders.show', $order->id));
@@ -69,9 +73,11 @@ class OrdersController extends Controller
      */
     public function show(Orders $order)
     {
-        echo "тут будет страничка с инфомрацией по заказу";
-        dd($order);
-        return '';
+        if (! Gate::forUser(Auth::user())->allows('order-access', $order)) {
+            abort(403);
+        }
+
+        return view('orders.show', ['order' => $order]);
     }
 
     /**
@@ -103,8 +109,29 @@ class OrdersController extends Controller
      * @param  \App\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orders $orders)
+    public function destroy(Orders $order)
     {
         //
+    }
+
+    public function complete(Orders $order)
+    {
+        if (! Gate::forUser(Auth::user())->allows('order-access', $order)) {
+            abort(403);
+        }
+        $order->update([
+            'status_id' => Statuses::all()->last()->id,
+        ]);
+        $order->save();
+        
+        // email
+        $rate_token = hash('ripemd160', rand());
+        RateTokens::create([
+            'token' => $rate_token,
+            'restaurant_id' => $order->restaurant->id,
+        ]);
+        Mail::to($order->email, $order->fio)->send(new OrderCompleteMail($order, $rate_token));
+
+        return '<p>Заказ #' . $order->id . ' завершен!</p><br><a href="' . route('home') . '">К панели</a>';
     }
 }

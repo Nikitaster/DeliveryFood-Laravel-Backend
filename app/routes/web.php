@@ -41,4 +41,9 @@ Route::get('/order-cancel/{id}', 'FrontendController@order_cancel')->name('order
 Route::resource('orders', 'OrdersController', ['only' => 
 ['show', 'store', 'destroy']]);
 
+Route::post('order-completing/{order}', 'OrdersController@complete')->name('order_complete');
+
 Route::post('/accounts/{id}', 'AccountController@update')->name('accounts_update');
+
+Route::get('rate/{token}', 'RateController@show')->name('rate');
+Route::post('rate', 'RateController@store')->name('add_rate');

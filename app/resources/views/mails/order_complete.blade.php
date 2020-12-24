@@ -14,6 +14,6 @@
     <p><strong>{{$order->fio}}</strong>, спасибо за ваш заказ! Приятного аппетита!</p>
     
     <span>Пожалуйста, оцените ресторан "{{$order->restaurant->name}}" по ссылке: </span>
-    <a href="{{route('rate', $rate_token)}}">тут будет ссылка</a>
+    <a href="{{route('rate', $rate_token)}}">Оценить</a>
 
 @endsection
