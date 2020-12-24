@@ -144,13 +144,15 @@ class OrdersController extends Controller
 
     public function opened_orders_list()
     {
-        $current_orders = Auth::user()->account->courier_orders;
+        // $current_orders = Auth::user()->account->courier_orders;
+        $current_orders = Orders::where('courier_id', '=', Auth::user()->account->id)
+            ->where('status_id', '=', Statuses::where('name', '=', 'Доставка')->first()->id);
 
         $opened_orders = Orders::where('status_id', '=', Statuses::where('name', '=', 'Подтвержден')->first()->id);
         
-        if (!$current_orders->isEmpty()) {
+        if (!$current_orders->get()->isEmpty()) {
             // показывать только заказы из текущего ресторана    
-            $opened_orders = $opened_orders->where('restaurant_id', '=', 1);
+            $opened_orders = $opened_orders->where('restaurant_id', '=', $current_orders->first()->restaurant_id);
         }
 
         return view('orders.list', ['order' => $opened_orders->paginate(1)]);
