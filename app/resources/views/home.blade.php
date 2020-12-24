@@ -154,7 +154,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach(Auth::user()->account->own_orders as $order)
+                                            @foreach($orders as $order)
                                                 <tr> 
                                                 <th scope="row"><a href="{{route('orders.show', $order->id)}}">{{$order->id}}</a></th>
                                                 <td>{{$order->total}} ₽</td>

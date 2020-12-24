@@ -183,6 +183,7 @@ class Busket {
 
         if (result.redirected){
             localStorage.clear();
+            // TODO: сделать кнопку очистки 
             document.querySelector('.cart-rest-name').textContent = '';
             window.location.href = result.url;
         }
