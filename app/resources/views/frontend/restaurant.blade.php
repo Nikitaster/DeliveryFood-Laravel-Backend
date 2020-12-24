@@ -6,11 +6,22 @@
     <section class="restaurants">
         <div class="section-heading">
             <h2 class="section-title restaurant-name">{{ $restaurant->name }}</h2>
-            <div class="rating">
-                <img src="{{ asset('images/rating.svg') }}" alt="">
-                4.5
-            </div>
-            @if(!$restaurant->goods->isEmpty())
+                @if($restaurant->rates->first())
+                        <div class="rating">
+                        <img src="{{asset('/images/rating.svg')}}" alt="">
+                         @php
+                            $rates = $restaurant->rates;
+                            $sum = 0;
+                            $amount = 0;
+                            foreach($rates as $rate) {
+                                $sum += (int)$rate->rate;
+                                $amount += 1;
+                            }
+                            echo round($sum / $amount, 2);
+                         @endphp
+                        </div>
+                        @endif
+                @if(!$restaurant->goods->isEmpty())
                 @php
                     $prices = $restaurant->goods->filter(function ($item) {
                         return !is_null($item->price);
