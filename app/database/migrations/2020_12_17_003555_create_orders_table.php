@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('courier_id')->nullable();;
             $table->json('goods');
-            $table->string('FIO');
+            $table->string('fio');
             $table->string('tel');
             $table->string('email');
             $table->string('address');
