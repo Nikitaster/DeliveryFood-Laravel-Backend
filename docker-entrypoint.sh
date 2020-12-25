@@ -28,10 +28,10 @@ php artisan key:generate && php artisan config:cache
 echo "======Make migrations======"
 php artisan migrate
 
-# echo "======Compile static======"
-# npm install 
-# npm run dev 
-# npm run prod 
+echo "======Compile static======"
+npm install 
+npm run dev 
+npm run prod 
 
 echo "======Start server======"
 php artisan serve --host=0.0.0.0 --port=80
