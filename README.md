@@ -36,7 +36,7 @@ I used my scaleway S3 busket. If you would like to customize it, do:
 
 ## Setting SMTP<a name="smtpSetting"></a>
 1. The default settings is my mailtrap.io (it is using for tests)
-2. If you would like to use your smtp driver, open */app/.env* file and change this settings: 
+2. If you would like to use your smtp driver, open */app/.env.example* file and change this settings: 
 ```php
 MAIL_MAILER=smtp
 MAIL_HOST=YOUR_HOST
@@ -45,3 +45,9 @@ MAIL_USERNAME=YOUR_USERNAME
 MAIL_PASSWORD=YOUR_PASSWORD
 MAIL_ENCRYPTION=tls
 ```
+3. Run: 
+```bash
+docker-compose restart
+```
+
+
