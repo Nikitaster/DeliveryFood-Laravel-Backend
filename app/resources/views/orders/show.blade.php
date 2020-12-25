@@ -9,6 +9,7 @@
         <div class="modal-dialog">
             <div class="modal-header">
                 <h3 class="modal-title">Заказ #{{$order->id}}</h3>
+                <p>Статус: <b>"{{$order->status->name}}"</b></p>
             </div>
             <div>
                 <h3>Доставка из {{$order->restaurant->name}}:</h3>
