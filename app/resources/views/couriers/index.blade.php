@@ -28,7 +28,21 @@
                         <td class="text-center">{{ $courier->FIO }}</td>
                         <td class="text-center">{{ $courier->user->email }}</td>
                         <td class="text-center">{{ $courier->phone }}</td>
-                        <td class="text-center">@if(!$courier->courier_orders->isEmpty()) {{ $courier->courier_orders}} @else – @endif </td>
+                        <td class="text-center">
+                            @if(!$courier->courier_orders->isEmpty()) 
+                                @php
+                                    $amount = 0;
+                                    foreach($courier->courier_orders as $order) {
+                                        if ($order->status->name == 'Завершен') {
+                                            $amount += 1;
+                                        }
+                                    }
+                                    echo $amount;
+                                @endphp
+                            @else 
+                                0 
+                            @endif 
+                        </td>
                         <td class="text-center">@if($courier->address) {{ $courier->address }} @else – @endif</td>
                         <td class="text-center">
                             <form method="POST" action="{{route('couriers.destroy', $courier->id)}}"> 
