@@ -28,7 +28,25 @@
                 <div class="card-text">
                     <div class="card-heading">
                         <h3 class="card-title"> {{ $restaurant->name }} </h3>
-                        <span class="card-tag tag">50 мин</span>
+                        <span class="card-tag tag">
+                        @php
+                        $amount = 0;
+                        $time_in_seconds = 0;
+                        foreach ($restaurant->orders as $order) {
+                            if ($order->status->name == 'Завершен') {
+                                $amount += 1;
+                                $time_in_seconds += (int)(strtotime($order->updated_at) - strtotime($order->created_at));
+                                // echo $time_in_seconds . '<br>';
+                            }
+                        }
+                        if ($amount > 0) {
+                            echo round($time_in_seconds / $amount / 60);
+                        } else {
+                            echo '-' ;
+                        }
+                        @endphp
+                        мин
+                        </span>
                     </div>
                     <!-- /.card-heading -->
                     <div class="card-info">

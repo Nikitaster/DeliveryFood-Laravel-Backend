@@ -104,7 +104,7 @@ class RestaurantsController extends Controller
     public function update(RestaurantEditRequest $request, Restaurants $restaurant)
     {
         $params = $request->only('name', 'address', 'category');
-        $params['name_lower'] = strtolower($request->input('name'));
+        $params['name_lower'] = mb_strtolower($request->input('name'));
         $params['category'] = (string)Categories::where('name', '=', $params['category'])->first()->id;
         
         if ($request->file()) {
