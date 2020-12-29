@@ -66,16 +66,6 @@
             <!-- /.modal-body -->
             <div class="modal-footer">
                 <span class="modal-price-tag order-total">{{$order->total}} ₽</span>
-                <div class="footer-buttons">
-                    @auth
-                        @if(Auth::user()->account->role->name == 'courier')
-                            <form action="{{route('order_complete', $order->id)}}" method="POST">
-                                {{csrf_field()}}
-                                <button type="submit" class="button button-primary" name="order" value="{{$order->id}}">Завершить доставку</button>
-                            </form>
-                        @endif
-                    @endauth
-                </div>
             </div>
             <!-- /.modal-footer -->
         </div>
