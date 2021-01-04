@@ -13,10 +13,23 @@
                     </div>
                     <!-- /.card-heading -->
                     <div class="card-info">
-                        <div class="rating">
+                        
+                        @if($restaurant->rates->first())
+                            <div class="rating">
                             <img src="{{asset('/images/rating.svg')}}" alt="">
-                            4.5
-                        </div>
+                            @php
+                                $rates = $restaurant->rates;
+                                $sum = 0;
+                                $amount = 0;
+                                foreach($rates as $rate) {
+                                    $sum += (int)$rate->rate;
+                                    $amount += 1;
+                                }
+                                echo round($sum / $amount, 2);
+                            @endphp
+                            </div>
+                        @endif
+
                         @if(!$restaurant->goods->isEmpty())
                         @php
                         $prices = $restaurant->goods->filter(function ($item) {
