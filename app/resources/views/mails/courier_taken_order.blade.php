@@ -14,7 +14,7 @@
 
     <h1>Заказ (#{{$order->id}}) уже в пути</h1>
     <p><strong>{{$order->fio}}</strong>, курьер уже в пути! Ваш заказ (#{{$order->id}}) на сумму <strong>{{$order->total}} ₽ </strong> из "{{$order->restaurant->name}}" скоро будет у вас!</p>
-    <p>Связаться с курьером ({{$courier->fio}}): {{$courier->phone}}</p>
+    <p>Связаться с курьером ({{$courier->FIO}}): {{$courier->phone}}</p>
     
     <div class="modal-dialog">
             <div class="modal-header">
