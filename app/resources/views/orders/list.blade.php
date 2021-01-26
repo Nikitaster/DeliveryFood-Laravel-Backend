@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    @isset($order)
+    @isset($order[0])
         <div class="card p-5 m-3">
             
             

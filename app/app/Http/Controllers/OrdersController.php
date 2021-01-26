@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderCreateMail;
 use App\Mail\OrderCompleteMail;
+use App\Mail\OrderCancelMail;
 use App\Mail\CourierTakenOrderMail;
 
 use Illuminate\Support\Facades\Gate;
@@ -118,6 +119,7 @@ class OrdersController extends Controller
     public function destroy(Orders $order)
     {
         $order->update(['status_id' => Statuses::where('name', '=', 'Отменен')->first()->id]);
+        Mail::to($order->email, $order->fio)->send(new OrderCancelMail($order));
         return redirect(route('orders.show', $order->id));
     }
 
